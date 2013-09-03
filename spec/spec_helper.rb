@@ -4,7 +4,7 @@ require 'bundler/setup'
 Bundler.require(:default, :development)
 
 require 'user_tracker/mocks/application_controller.rb'
-require 'user_tracker/mocks/mock_controller.rb'
+require 'user_tracker/mocks/mock_controllers.rb'
 require 'user_tracker/mocks/mock_track_system.rb'
 
 RSpec.configure do |config|

@@ -14,10 +14,18 @@ describe UserTracker::TracksExecutor do
     controller.update
 
     track_system.tracked_events.should eq(
-      [{event_name: "Created!", parameters: nil}, {event_name: "Updated!", parameters: nil}])
+      [{ event_name: "Created!", parameters: {"Additional parameter" => "123"} },
+       { event_name: "Updated!", parameters: {"Updated item" => "Person"} }])
   end
 
-  it "check source" do
+  it "should track actions only from specific controller" do
+    controller.create
+    OtherMockController.new.update
+
+    track_system.tracked_events.should eq [{ event_name: "Created!", parameters: {"Additional parameter" => "123"} }]
+  end
+
+  it "should have source" do
     executor.source.count.should eq 2
   end 
 
@@ -28,6 +36,15 @@ describe UserTracker::TracksExecutor do
     controller.create
   end
 
+  class TrackingActions
+    include UserTracker::TrackingActions
+
+    def initialize
+      track(:create, MockController, "Created!") { next {"Additional parameter" => "123" } } 
+      track(:update, MockController, "Updated!") { next {"Updated item" => @update_item } }
+    end
+  end
+
   class JustOneTrackSystem
     def initialize
       raise RuntimeError if defined?(@@initialized)
@@ -35,15 +52,6 @@ describe UserTracker::TracksExecutor do
     end
 
     def track(name, args)
-    end
-  end
-
-  class TrackingActions
-    include UserTracker::TrackingActions
-
-    def initialize
-      track :create, MockController, "Created!"
-      track :update, MockController, "Updated!"
     end
   end
 end
