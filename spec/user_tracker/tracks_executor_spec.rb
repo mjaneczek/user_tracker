@@ -36,6 +36,30 @@ describe UserTracker::TracksExecutor do
     controller.create
   end
 
+  describe "filters" do
+    it "should register new filter" do
+      executor.filters.push(Proc.new { false })
+
+      controller.create
+      track_system.tracked_events.count.should eq 0
+    end
+
+    it "should register default filter" do
+      executor.filters.first.should eq UserTracker::ActiveRecordValidationFilter
+    end
+
+    it "should pass arguments to filter method" do
+      executor.filters.push(Proc.new do |controller, action_name, event_name, parameters|
+       controller.should be_an_instance_of MockController 
+       action_name.should eq :create
+       event_name.should eq "Created!"
+       parameters.should eq({"Additional parameter" => "123" })
+      end)
+
+      controller.create
+    end
+  end
+
   class TrackingActions
     include UserTracker::TrackingActions
 
@@ -54,4 +78,7 @@ describe UserTracker::TracksExecutor do
     def track(name, user, args)
     end
   end
+
+  class ItemController < ApplicationController; end
+  class Item; end
 end
