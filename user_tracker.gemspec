@@ -8,7 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = UserTracker::VERSION
   spec.authors       = ["Michał Janeczek"]
   spec.email         = ["michal.janeczek@ymail.com"]
-  spec.description   = "Track user actions like update profile, order product and everything else You need!"
+  spec.description   = "Track user's actions like profile update, product order and everything else you need!
+                        Don't repeat yourself - just one configuration file - no duplications across controllers' actions."
   spec.summary       = "Simple action tracker. All configurations in one file!"
   spec.homepage      = "http://github.com/mjaneczek/user_tracker"
   spec.license       = "MIT"
