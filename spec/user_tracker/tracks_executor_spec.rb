@@ -2,10 +2,9 @@ require "spec_helper"
 
 describe UserTracker::TracksExecutor do
   let(:controller) { MockController.new }
-  let(:executor) { UserTracker::TracksExecutor }
+  let(:executor) { UserTracker::TracksExecutor.new }
   let(:track_system) { MockTrackSystem.new }
   before(:each) do 
-    executor.initialize
     executor.track_system = track_system
   end
 

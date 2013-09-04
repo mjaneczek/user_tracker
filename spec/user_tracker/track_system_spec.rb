@@ -4,6 +4,6 @@ describe UserTracker::TrackSystem do
   let(:system) { UserTracker::TrackSystem.new }
 
   it "should initialize" do
-    # system.create
+    system.track("New event", nil)
   end 
 end
