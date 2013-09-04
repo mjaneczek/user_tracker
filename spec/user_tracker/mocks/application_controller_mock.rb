@@ -7,4 +7,8 @@ class ApplicationController
     self.stub(:action_name).and_return(action_name)
     self.instance_exec(self, &@@after_filter_action)
   end
+
+  def current_user
+    User.instance
+  end
 end

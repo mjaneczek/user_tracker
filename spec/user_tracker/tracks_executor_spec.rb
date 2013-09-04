@@ -13,15 +13,16 @@ describe UserTracker::TracksExecutor do
     controller.update
 
     track_system.tracked_events.should eq(
-      [{ event_name: "Created!", parameters: {"Additional parameter" => "123"} },
-       { event_name: "Updated!", parameters: {"Updated item" => "Person"} }])
+      [{ event_name: "Created!", user: User.instance, parameters: {"Additional parameter" => "123"} },
+       { event_name: "Updated!", user: User.instance, parameters: {"Updated item" => "Person"} }])
   end
 
   it "should track actions only from specific controller" do
     controller.create
     OtherMockController.new.update
 
-    track_system.tracked_events.should eq [{ event_name: "Created!", parameters: {"Additional parameter" => "123"} }]
+    track_system.tracked_events.should eq [{ event_name: "Created!", 
+      user: User.instance, parameters: {"Additional parameter" => "123"} }]
   end
 
   it "should have source" do
@@ -50,7 +51,7 @@ describe UserTracker::TracksExecutor do
       @@initialized = true
     end
 
-    def track(name, args)
+    def track(name, user, args)
     end
   end
 end

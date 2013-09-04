@@ -10,11 +10,11 @@ module UserTracker
       end
     end
 
-    def after_controller_action(controler, action_name)
+    def after_controller_action(controller, action_name)
       return unless source 
       source.each do |item|
-        if action_name.to_sym == item[:action_name] && controler.class == item[:subject]
-          track_system.track(item[:event_name], item[:block] && controler.instance_eval(&item[:block]))
+        if action_name.to_sym == item[:action_name] && controller.class == item[:subject]
+          track_system.track(item[:event_name], controller.current_user, item[:block] && controller.instance_eval(&item[:block]))
         end
       end
     end

@@ -3,9 +3,10 @@ require 'bundler/setup'
 
 Bundler.require(:default, :development)
 
-require 'user_tracker/mocks/application_controller.rb'
+require 'user_tracker/mocks/application_controller_mock.rb'
 require 'user_tracker/mocks/mock_controllers.rb'
 require 'user_tracker/mocks/mock_track_system.rb'
+require 'user_tracker/mocks/user_mock.rb'
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
