@@ -17,6 +17,4 @@ describe UserTracker::TrackSystem do
 
     system.track("New event", User.instance, { test: true })
   end 
-
-  class Analytics; end
 end
