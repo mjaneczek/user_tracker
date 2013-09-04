@@ -6,10 +6,10 @@ require 'user_tracker/version'
 Gem::Specification.new do |spec|
   spec.name          = "user_tracker"
   spec.version       = UserTracker::VERSION
-  spec.authors       = ["mjaneczek"]
+  spec.authors       = ["Michał Janeczek"]
   spec.email         = ["michal.janeczek@ymail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "Track user actions like update profile, order product and everything else You need!"
+  spec.summary       = "Simple action tracker. All configurations in one file!"
   spec.homepage      = ""
   spec.license       = "MIT"
 
