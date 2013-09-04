@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe UserTracker::TrackSystem do
-  let(:system) { UserTracker::TrackSystem.new("secret_key") }
+describe UserTracker::AnalyticsTrackSystem do
+  let(:system) { UserTracker::AnalyticsTrackSystem.new("secret_key") }
 
   it "should initialize" do
     allow(Analytics).to receive(:init)

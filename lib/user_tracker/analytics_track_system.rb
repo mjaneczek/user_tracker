@@ -1,5 +1,5 @@
 module UserTracker
-  class TrackSystem
+  class AnalyticsTrackSystem
     def initialize(secret_key)
       ::Analytics.init(secret: secret_key)
     end
