@@ -8,11 +8,11 @@ describe UserTracker::AnalyticsTrackSystem do
     allow(Analytics).to receive(:identify)
     allow(Analytics).to receive(:track)
 
-    Analytics.should receive(:init).ordered.
+    expect(Analytics).to receive(:init).ordered.
       with(secret: "secret_key")
-    Analytics.should receive(:identify).ordered.
+    expect(Analytics).to receive(:identify).ordered.
       with(user_id: User.instance.id, traits: { name: User.instance.name, email: User.instance.email })
-    Analytics.should receive(:track).ordered.
+    expect(Analytics).to receive(:track).ordered.
       with(user_id: User.instance.id, event: "New event", properties: { test: true })
 
     system.track("New event", User.instance, { test: true })

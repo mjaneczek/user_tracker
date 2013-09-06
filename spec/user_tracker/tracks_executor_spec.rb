@@ -12,7 +12,7 @@ describe UserTracker::TracksExecutor do
     controller.create
     controller.update
 
-    track_system.tracked_events.should eq(
+    expect(track_system.tracked_events).to eq(
       [{ event_name: "Created!", user: User.instance, parameters: {"Additional parameter" => "123"} },
        { event_name: "Updated!", user: User.instance, parameters: {"Updated item" => "Person"} }])
   end
@@ -21,12 +21,12 @@ describe UserTracker::TracksExecutor do
     controller.create
     OtherMockController.new.update
 
-    track_system.tracked_events.should eq [{ event_name: "Created!", 
+    expect(track_system.tracked_events).to eq [{ event_name: "Created!", 
       user: User.instance, parameters: {"Additional parameter" => "123"} }]
   end
 
   it "should have source" do
-    executor.source.count.should eq 2
+    expect(executor.source.count).to eq 2
   end 
 
   it "should create instance of track system just one time" do
@@ -41,19 +41,19 @@ describe UserTracker::TracksExecutor do
       executor.filters.push(Proc.new { false })
 
       controller.create
-      track_system.tracked_events.count.should eq 0
+      expect(track_system.tracked_events.count).to eq 0
     end
 
     it "should register default filter" do
-      executor.filters.first.should eq UserTracker::ActiveRecordValidationFilter
+      expect(executor.filters.first).to eq UserTracker::ActiveRecordValidationFilter
     end
 
     it "should pass arguments to filter method" do
       executor.filters.push(Proc.new do |controller, action_name, event_name, parameters|
-       controller.should be_an_instance_of MockController 
-       action_name.should eq :create
-       event_name.should eq "Created!"
-       parameters.should eq({"Additional parameter" => "123" })
+       expect(controller).to be_an_instance_of MockController 
+       expect(action_name).to eq :create
+       expect(event_name).to eq "Created!"
+       expect(parameters).to eq({"Additional parameter" => "123" })
       end)
 
       controller.create
