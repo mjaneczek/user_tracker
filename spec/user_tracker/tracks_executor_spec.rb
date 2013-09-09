@@ -44,8 +44,8 @@ describe UserTracker::TracksExecutor do
       expect(track_system.tracked_events.count).to eq 0
     end
 
-    it "should register default filter" do
-      expect(executor.filters.first).to eq UserTracker::ActiveRecordValidationFilter
+    it "should register default filters" do
+      expect(executor.filters).to eq [UserTracker::ActiveRecordValidationFilter, UserTracker::FlashErrorFilter]
     end
 
     it "should pass arguments to filter method" do

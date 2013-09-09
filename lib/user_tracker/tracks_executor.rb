@@ -28,7 +28,7 @@ module UserTracker
     private
 
       def register_default_filters
-        @filters.push(UserTracker::ActiveRecordValidationFilter)
+        @filters.push(UserTracker::ActiveRecordValidationFilter, UserTracker::FlashErrorFilter)
       end
 
       def hook_application_controller_after_filter_method
