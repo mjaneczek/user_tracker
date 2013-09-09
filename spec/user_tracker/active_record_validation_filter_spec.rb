@@ -17,7 +17,7 @@ describe UserTracker::ActiveRecordValidationFilter do
     controller = ProductController.new
     controller.instance_variable_set :@product, "string"
 
-    expect(filter.call(ProductController.new, nil, nil, nil)).to be_true
+    expect(filter.call(controller, nil, nil, nil)).to be_true
   end
 
   it "should return true if valid" do

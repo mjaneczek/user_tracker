@@ -7,7 +7,7 @@ module UserTracker
       model = controller.instance_eval(model_name)
       return true unless model
 
-      model.try(:valid?)
+      model.try(:valid?).nil? || model.try(:valid?)
     end
   end
 end

@@ -37,7 +37,8 @@ describe UserTracker::TracksExecutor do
   end
 
   describe "filters" do
-    it "should register new filter" do
+    it "should skip if any filter is false" do
+      executor.filters.push(Proc.new { true })
       executor.filters.push(Proc.new { false })
 
       controller.create
