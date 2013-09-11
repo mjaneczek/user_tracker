@@ -1,7 +1,10 @@
 module UserTracker
   class AnalyticsTrackSystem
+    attr_accessor :user_additional_parameters
+
     def initialize(secret_key)
       ::Analytics.init(secret: secret_key)
+      @user_additional_parameters = -> (user) { { email: user.email} }
     end
 
     def track(event_name, user, parameters)
@@ -17,7 +20,7 @@ module UserTracker
     def identity_user(user)
       ::Analytics.identify(
         user_id: user.id,
-        traits: { email: user.email, name: user.name }
+        traits: user_additional_parameters.call(user)
       )
     end
   end
