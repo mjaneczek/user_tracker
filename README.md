@@ -1,4 +1,4 @@
-# UserTracker
+# UserTracker [![Code Climate](https://codeclimate.com/github/mjaneczek/user_tracker.png)](https://codeclimate.com/github/mjaneczek/user_tracker)
 
 Track user's actions like profile update, product order and everything else you need!
 Gem provides simple configuration separated from controller's code. 
